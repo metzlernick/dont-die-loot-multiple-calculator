@@ -299,6 +299,10 @@
 
     <div class="results">
       <div class="stat-row">
+        <span class="stat-label">Total Sticker Count</span>
+        <span class="stat-value" id="total-stickers">0</span>
+      </div>
+      <div class="stat-row">
         <span class="stat-label">Total Loot Points</span>
         <span class="stat-value" id="total-pts">0</span>
       </div>
@@ -347,6 +351,10 @@
       const total = getTotal();
       const mult  = getMultiple(total);
 
+      const stickerCount = ['common', 'rare', 'legendary', 'mythic'].reduce((sum, r) => {
+        return sum + (Math.max(0, parseInt(document.getElementById('input-' + r).value) || 0));
+      }, 0);
+      document.getElementById('total-stickers').textContent = stickerCount;
       document.getElementById('total-pts').textContent = total;
       document.getElementById('mult-display').textContent = mult + 'x';
 
