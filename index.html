@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Don't Die — Loot Calculator</title>
+  <title>Don't Die — Payout Calculator</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -45,15 +45,15 @@
       margin-top: 0.3rem;
     }
 
-    /* ── Sticker grid ── */
-    .stickers-grid {
+    /* ── Gear grid ── */
+    .gear-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0.75rem;
       margin-bottom: 1rem;
     }
 
-    .sticker-card {
+    .gear-card {
       background: #161625;
       border: 2px solid;
       border-radius: 14px;
@@ -63,10 +63,10 @@
       gap: 0.6rem;
     }
 
-    .sticker-card.common    { border-color: #4b5563; }
-    .sticker-card.rare      { border-color: #3b82f6; }
-    .sticker-card.legendary { border-color: #f59e0b; }
-    .sticker-card.mythic    { border-color: #a855f7; }
+    .gear-card.common    { border-color: #4b5563; }
+    .gear-card.rare      { border-color: #3b82f6; }
+    .gear-card.legendary { border-color: #f59e0b; }
+    .gear-card.mythic    { border-color: #a855f7; }
 
     .rarity-name {
       font-size: 0.75rem;
@@ -86,7 +86,7 @@
       margin-top: 1px;
     }
 
-    .sticker-input {
+    .gear-input {
       background: #0d0d1a;
       border: 1px solid #1e1e35;
       border-radius: 9px;
@@ -99,15 +99,15 @@
       transition: border-color 0.15s;
       -moz-appearance: textfield;
     }
-    .sticker-input::-webkit-outer-spin-button,
-    .sticker-input::-webkit-inner-spin-button { -webkit-appearance: none; }
-    .sticker-input:focus { outline: none; }
-    .sticker-input::placeholder { color: #2d3748; }
+    .gear-input::-webkit-outer-spin-button,
+    .gear-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+    .gear-input:focus { outline: none; }
+    .gear-input::placeholder { color: #2d3748; }
 
-    .common    .sticker-input:focus { border-color: #4b5563; }
-    .rare      .sticker-input:focus { border-color: #3b82f6; }
-    .legendary .sticker-input:focus { border-color: #f59e0b; }
-    .mythic    .sticker-input:focus { border-color: #a855f7; }
+    .common    .gear-input:focus { border-color: #4b5563; }
+    .rare      .gear-input:focus { border-color: #3b82f6; }
+    .legendary .gear-input:focus { border-color: #f59e0b; }
+    .mythic    .gear-input:focus { border-color: #a855f7; }
 
     /* ── Results card ── */
     .results {
@@ -262,48 +262,48 @@
   <div class="container">
 
     <div class="header">
-      <h1>Loot Calculator</h1>
-      <p>Don't Die &nbsp;·&nbsp; Sticker Multiplier</p>
+      <h1>Payout Calculator</h1>
+      <p>Don't Die &nbsp;·&nbsp; Gear Multiplier</p>
     </div>
 
-    <div class="stickers-grid">
-      <div class="sticker-card common">
+    <div class="gear-grid">
+      <div class="gear-card common">
         <div>
           <div class="rarity-name">Common</div>
-          <div class="pts-badge">1 loot point each</div>
+          <div class="pts-badge">1 payout point each</div>
         </div>
-        <input class="sticker-input" type="number" id="input-common" min="0" value="" placeholder="0">
+        <input class="gear-input" type="number" id="input-common" min="0" value="" placeholder="0">
       </div>
-      <div class="sticker-card rare">
+      <div class="gear-card rare">
         <div>
           <div class="rarity-name">Rare</div>
-          <div class="pts-badge">2 loot points each</div>
+          <div class="pts-badge">2 payout points each</div>
         </div>
-        <input class="sticker-input" type="number" id="input-rare" min="0" value="" placeholder="0">
+        <input class="gear-input" type="number" id="input-rare" min="0" value="" placeholder="0">
       </div>
-      <div class="sticker-card legendary">
+      <div class="gear-card legendary">
         <div>
           <div class="rarity-name">Legendary</div>
-          <div class="pts-badge">5 loot points each</div>
+          <div class="pts-badge">5 payout points each</div>
         </div>
-        <input class="sticker-input" type="number" id="input-legendary" min="0" value="" placeholder="0">
+        <input class="gear-input" type="number" id="input-legendary" min="0" value="" placeholder="0">
       </div>
-      <div class="sticker-card mythic">
+      <div class="gear-card mythic">
         <div>
           <div class="rarity-name">Mythic</div>
-          <div class="pts-badge">11 loot points each</div>
+          <div class="pts-badge">11 payout points each</div>
         </div>
-        <input class="sticker-input" type="number" id="input-mythic" min="0" value="" placeholder="0">
+        <input class="gear-input" type="number" id="input-mythic" min="0" value="" placeholder="0">
       </div>
     </div>
 
     <div class="results">
       <div class="stat-row">
-        <span class="stat-label">Total Sticker Count</span>
-        <span class="stat-value" id="total-stickers">0</span>
+        <span class="stat-label">Total Gear Count</span>
+        <span class="stat-value" id="total-gear">0</span>
       </div>
       <div class="stat-row">
-        <span class="stat-label">Total Loot Points</span>
+        <span class="stat-label">Total Payout Points</span>
         <span class="stat-value" id="total-pts">0</span>
       </div>
 
@@ -311,7 +311,7 @@
 
       <div class="multiple-block">
         <div class="multiple-number" id="mult-display">0x</div>
-        <div class="multiple-sub">LOOT MULTIPLE</div>
+        <div class="multiple-sub">PAYOUT MULTIPLE</div>
       </div>
 
       <div id="progress-area"></div>
@@ -328,8 +328,8 @@
     // ── Data ─────────────────────────────────────────────────────────
     const RARITY_PTS = { common: 1, rare: 2, legendary: 5, mythic: 11 };
 
-    // THRESHOLDS[i] = cumulative loot points needed to reach i× multiple
-    const THRESHOLDS = [0, 5, 10, 16, 22, 28, 36, 44, 52, 60, 68];
+    // THRESHOLDS[i] = cumulative payout points needed to reach i× multiple
+    const THRESHOLDS = [0, 4, 9, 14, 19, 24, 30, 36, 42, 49, 56];
     const MAX_MULT = THRESHOLDS.length - 1; // 10
 
     // ── Calculate ────────────────────────────────────────────────────
@@ -351,10 +351,10 @@
       const total = getTotal();
       const mult  = getMultiple(total);
 
-      const stickerCount = ['common', 'rare', 'legendary', 'mythic'].reduce((sum, r) => {
+      const gearCount = ['common', 'rare', 'legendary', 'mythic'].reduce((sum, r) => {
         return sum + (Math.max(0, parseInt(document.getElementById('input-' + r).value) || 0));
       }, 0);
-      document.getElementById('total-stickers').textContent = stickerCount;
+      document.getElementById('total-gear').textContent = gearCount;
       document.getElementById('total-pts').textContent = total;
       document.getElementById('mult-display').textContent = mult + 'x';
 
@@ -391,7 +391,7 @@
     // ── Reference table ──────────────────────────────────────────────
     function buildRefTable() {
       const table = document.getElementById('ref-table');
-      const steps = ['-', 5, 5, 6, 6, 6, 8, 8, 8, 8, 8];
+      const steps = ['-', 4, 5, 5, 5, 5, 6, 6, 6, 7, 7];
       table.innerHTML = THRESHOLDS.map((pts, i) => `
         <div class="ref-row" id="ref-row-${i}">
           <span class="ref-mult">${i}×</span>
@@ -417,7 +417,7 @@
 
     // ── Init ─────────────────────────────────────────────────────────
     buildRefTable();
-    document.querySelectorAll('.sticker-input').forEach(el => el.addEventListener('input', update));
+    document.querySelectorAll('.gear-input').forEach(el => el.addEventListener('input', update));
     update();
   </script>
 </body>
